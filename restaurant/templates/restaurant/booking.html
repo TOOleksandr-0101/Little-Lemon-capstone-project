@@ -1,0 +1,62 @@
+{% extends "restaurant/base.html" %}
+{% load static %}
+
+{% block title %}Book a table | Little Lemon{% endblock %}
+
+{% block content %}
+<section class="booking-hero">
+  <p class="eyebrow">Reservations</p>
+  <h1>Book a table</h1>
+  <p>Pick a date and time. Already reserved times will be unavailable.</p>
+</section>
+
+<section class="booking-layout">
+  <div class="panel form-panel">
+    {% if messages %}
+      {% for message in messages %}<div class="message success">{{ message }}</div>{% endfor %}
+    {% endif %}
+
+    {% if form.non_field_errors %}
+      <div class="message error">{{ form.non_field_errors.0 }}</div>
+    {% endif %}
+
+    <form method="post" id="booking-form">
+      {% csrf_token %}
+      <div class="field">
+        <label for="{{ form.first_name.id_for_label }}">{{ form.first_name.label }}</label>
+        {{ form.first_name }}
+        {% for error in form.first_name.errors %}<small class="field-error">{{ error }}</small>{% endfor %}
+      </div>
+      <div class="field">
+        <label for="{{ form.reservation_date.id_for_label }}">{{ form.reservation_date.label }}</label>
+        {{ form.reservation_date }}
+        {% for error in form.reservation_date.errors %}<small class="field-error">{{ error }}</small>{% endfor %}
+      </div>
+      <div class="field">
+        <label for="{{ form.reservation_slot.id_for_label }}">{{ form.reservation_slot.label }}</label>
+        {{ form.reservation_slot }}
+        {% for error in form.reservation_slot.errors %}<small class="field-error">{{ error }}</small>{% endfor %}
+        <small class="hint">Unavailable times are shown in grey.</small>
+      </div>
+      <button class="button full" type="submit">Book now</button>
+    </form>
+  </div>
+
+  <aside class="panel reservations-panel">
+    <div class="panel-heading">
+      <div>
+        <p class="eyebrow">Selected day</p>
+        <h2>Current bookings</h2>
+      </div>
+      <span id="booking-count" class="count">0</span>
+    </div>
+    <div id="bookings-list" class="bookings-list" aria-live="polite">
+      <p class="loading">Loading…</p>
+    </div>
+  </aside>
+</section>
+{% endblock %}
+
+{% block scripts %}
+<script src="{% static 'restaurant/js/booking.js' %}"></script>
+{% endblock %}

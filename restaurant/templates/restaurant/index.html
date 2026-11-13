@@ -1,0 +1,37 @@
+{% extends "restaurant/base.html" %}
+
+{% block title %}Little Lemon | Chicago{% endblock %}
+
+{% block content %}
+<section class="hero">
+  <div class="hero-copy">
+    <p class="eyebrow">Chicago</p>
+    <h1>Simple food.<br>Good company.</h1>
+    <p>Family recipes, fresh ingredients and a warm table in the heart of the city.</p>
+    <a class="button" href="{% url 'booking' %}">Reserve a table</a>
+  </div>
+  <div class="hero-card" aria-hidden="true">
+    <div class="lemon">🍋</div>
+    <p>Open daily</p>
+    <strong>10:00 — 21:00</strong>
+  </div>
+</section>
+
+<section class="features">
+  <article>
+    <span>01</span>
+    <h2>Fresh every day</h2>
+    <p>Seasonal Mediterranean dishes made in our kitchen.</p>
+  </article>
+  <article>
+    <span>02</span>
+    <h2>A table for you</h2>
+    <p>Choose a date and an available time in a few seconds.</p>
+  </article>
+  <article>
+    <span>03</span>
+    <h2>Made for sharing</h2>
+    <p>Relaxed food, generous plates and no complicated rules.</p>
+  </article>
+</section>
+{% endblock %}
